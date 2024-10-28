@@ -15,7 +15,7 @@ app = Flask(__name__)
 tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased', do_lower_case=True)
 
 # Attempt to load model directly if it's a full model
-model_path = os.path.join(os.getcwd(), "best_model.pth")
+model_path = os.path.join(os.getcwd(), "best_model_quantized.pth")
 try:
     model = torch.load(model_path, map_location=torch.device("cpu"))
 except TypeError:
