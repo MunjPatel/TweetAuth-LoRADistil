@@ -154,7 +154,8 @@ def train_model(model, train_dataloader, val_dataloader, optimizer, scheduler, e
 
         # Save best model
         if avg_val_accuracy > best_eval_accuracy:
-            torch.save(model, 'best_lora_distilbert_model.pth')
+            model_path = 'best_lora_distilbert_model.pth'
+            torch.save(model, model_path)
             best_eval_accuracy = avg_val_accuracy
 
         training_stats.append({
@@ -170,3 +171,14 @@ def train_model(model, train_dataloader, val_dataloader, optimizer, scheduler, e
     print(f"Total training took {format_time(time.time() - total_t0)} (h:mm:ss)")
 
 train_model(model, train_dataloader, val_dataloader, optimizer, scheduler)
+
+# Apply dynamic quantization to reduce model size and memory usage
+quantized_model = torch.quantization.quantize_dynamic(
+    model,  # the original model
+    {torch.nn.Linear},  # specify layers to quantize
+    dtype=torch.qint8  # specify target dtype (8-bit integers)
+)
+
+# Save the quantized model
+quantized_model_path = "best_model_quantized.pth"
+torch.save(quantized_model, quantized_model_path)
