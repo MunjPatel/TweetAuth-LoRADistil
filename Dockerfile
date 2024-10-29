@@ -32,5 +32,5 @@ EXPOSE 7860
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-# Run the Flask application
-CMD ["flask", "run", "--host=0.0.0.0", "--port=7860"]
+# Run the Flask application with gunicorn for production-like stability
+CMD ["gunicorn", "--bind", "0.0.0.0:7860", "app:app"]
