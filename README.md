@@ -55,7 +55,7 @@ To get started with Tweet-Auth-LoRADistil using Docker, follow these steps:
    ```bash
    docker run -p 7860:7860 munjpatel2003/tweet-auth-lora-distil:latest
    ```
-3. **Access the Web Interface**: Open your web browser and navigate to http://localhost:5000 to start analyzing tweets.
+3. **Access the Web Interface**: Open your web browser and navigate to `http://localhost:5000` to start analyzing tweets.
 
 ## Performance Optimization
 
